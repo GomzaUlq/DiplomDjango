@@ -1,0 +1,26 @@
+{% extends "catalog/base.html" %}
+{% load custom_filtres %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post">
+        {% csrf_token %}
+        <h2>Вход</h2>
+        {% if info_error %}  {# исправил на проверку самой переменной #}
+            <div class="error">{{ info_error }}</div>
+        {% endif %}
+        {% for field in form %}
+            <div class="form-group">
+                {{ field.label_tag }}
+                {{ field|add_class:"form-control" }}  {# применения класса для стилей #}
+                {% for error in field.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn">Войти</button>
+    </form>
+</div>
+{% endblock %}

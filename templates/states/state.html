@@ -1,0 +1,18 @@
+{% extends "catalog/base.html" %}
+
+{% block title %}Статьи о чае{% endblock %}
+
+{% block content %}
+    <h1>Статьи о чае</h1>
+    <div class="article-list">
+        {% for state in states %}
+            <div class="article-item">
+                <a href="{% url 'state_detail' state.id %}">
+                    <img src="{{ state.image.url }}" alt="{{ state.title }}" class="article-image">
+                    <h2 class="article-title">{{ state.title }}</h2>
+                    <p class="article-text">{{ state.content|truncatewords:30 }}</p>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
